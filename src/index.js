@@ -4,13 +4,19 @@ import mongoose from 'mongoose'
 import { DB_NAME } from './constants.js'
 import express from 'express'
 import connectDB from './db/index.js'
-const app = express()
+import app from './app.js'
+//const app = express()
 
 dotenv.config({path: "./env"})
 
 
 connectDB()  
-
+.then(()=>{
+    app.listen(process.env.PORT || 8000 , ()=>{console.log("server is running ")})
+})
+.catch((err)=>{
+    console.log("mongodb connection falied !!! ",err);
+})
 
 /*
 (async () => {
